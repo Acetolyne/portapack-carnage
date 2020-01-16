@@ -77,7 +77,9 @@ private:
 		{ 10 * 8, 1 * 16 },
 		8,
 		{
-			{ "Subaru", 0 }
+			{ "Subaru", 0 },
+			{ "Chrysler", 1 },
+			{ "Chevy", 2 }
 		}
 	};
 	
@@ -116,7 +118,7 @@ private:
 		16 * 16,
 		0,
 		15,
-		true
+		false
 	};
 	
 	MessageHandlerRegistration message_handler_tx_progress {
