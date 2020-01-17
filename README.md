@@ -126,10 +126,93 @@ ShareBrained Technology, Inc.
 The latest version of this repository can be found at
 https://github.com/sharebrained/portapack-hackrf/
 
-## HAVOC specific things
+## Tools
 
-Warning: won't reply to questions about flashing and compiling. See links above.
+You will need a few tools installed on your computer before you begin.
 
-Furrtek <furrtek@gmail.com>
+    GCC-ARM-Embedded - I am using the "9-2019-q4-major" release.
+    CMake 2.8.9 or newer - Build system now uses CMake instead of GNU Make.
+    PyYAML for Python 2.7 (for libopencm3, built by hackrf submodule).
+    dfu-util 0.7 or newer - Used to load and run the stock HackRF firmware from RAM.
 
-<http://www.furrtek.org>
+## Getting the Source Code
+
+The source code is hosted on GitHub. Change to a directory where you want the source code, and clone the source repository.
+
+git clone --recurse-submodules https://github.com/Acetolyne/portapack-havoc.git
+
+Change directories into the cloned repository.
+
+cd portapack-hackrf
+
+## Building
+
+Make a "build" directory and initialize the CMake build files into that directory:
+
+mkdir build
+cd build
+cmake ..
+
+Make the SPI flash binary image (which builds the bootstrap, application, and baseband binaries):
+
+make firmware
+
+The binary will be at "firmware/portapack-h1-havoc.bin". under the build directory that you are currently in.
+
+## Flashing Firmware
+
+Once you have built the binary, you must program it into the HackRF One SPI flash.
+Flashing
+
+If you do not already have the firmware on your HackRF the follow the "install firmware" instructions.
+If you previously had the firmware and only want to update it with the latest and greatest then follow the "update firmware" instructions below.
+
+### Install Firmware for Linux
+
+install dfu-util typically with ```sudo apt install dfu-util```
+
+Plug the HackRF into a USB port on your computer.
+
+Hold down the HackRF DFU button. Press and release the HackRF reset button. Wait a second or two. Then release the DFU button. The HackRF is now in DFU mode.
+
+Program the HackRF's SPI flash:
+
+make program
+
+When finished, press the reset button on the HackRF. The PortaPack code is now running from the SPI flash on the HackRF.
+
+### Update firmware
+
+
+1. Put the HackRF into DFU mode by doing one of the below.
+
+- In the havoc UI go to the main menu and choose HackRF and choose yes when it asks you if you want to go to HackRF mode.
+
+- Hold the DFU button ( the button nearest to the antenna ) and press the reset button while still holding the DFU button wait a couple seconds then release the DFU button.
+
+2. cd to the firmware
+
+2. Flash the havoc firmware with ```hackrf_spiflash -w portapack-h1-havoc.bin```
+
+- If the hackrf_spiflash program is not available you have not built it yet. follow the directions below then try reflashing with the above command.
+
+
+### Building the hackrf_spiflash utility
+
+1. From the root of the git repository cd to hackrf/host/hackrf-tools/src
+
+2. mkdir build 
+
+3. cd build
+
+4. cmake ..
+
+5. make
+
+6. make install
+
+7. ldconfig
+
+
+
+
