@@ -100,8 +100,8 @@ private:
 		{ 10 * 8, 3 * 16 },
 		10,
 		{
-			{ "315.0000", 1 },
-			{ "433.9200", 2 }
+			{ "315 MHz", 1 },
+			{ "433.92 MHz", 2 }
 		}
 	};
 	
@@ -129,7 +129,7 @@ private:
 		16 * 16,
 		0,
 		15,
-		false
+		true
 	};
 	
 	MessageHandlerRegistration message_handler_tx_progress {
