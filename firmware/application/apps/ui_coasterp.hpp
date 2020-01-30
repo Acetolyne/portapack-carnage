@@ -39,7 +39,7 @@ public:
 	
 	void focus() override;
 	
-	std::string title() const override { return "Si44xx transmit"; };
+	std::string title() const override { return "Pager transmit"; };
 
 private:
 	enum tx_modes {
@@ -56,19 +56,44 @@ private:
 	
 	Labels labels {
 		{ { 1 * 8, 3 * 8 }, "Syscall pager TX beta", Color::light_grey() },
-		{ { 1 * 8, 8 * 8 }, "Data:", Color::light_grey() }
+		{ { 30 * 8, 8 * 8 }, "Data:", Color::light_grey() },
+		{ { 1 * 8, 10 * 8 }, "RestaurantId:  /255", Color::light_grey() },
+		{ { 1 * 8, 14 * 8 }, "PagerId:  /1023", Color::light_grey() },
+		{ { 1 * 8, 18 * 8 }, "Alert Type:", Color::light_grey() } //TBD Numbers or list?
 	};
 	
 	SymField sym_data {
-		{ 7 * 8, 8 * 8 },
+		{ 30 * 8, 8 * 8 },
 		16,		// 14 ? 12 ?
 		SymField::SYMFIELD_HEX
 	};
 	
-	Checkbox checkbox_scan {
-		{ 10 * 8, 14 * 8 },
+	Checkbox restaurant_scan {
+		{ 22 * 8, 9 * 8 },
 		4,
 		"Scan"
+	};
+
+	NumberField field_restaurant {
+		{ 13 * 8, 10 * 8 },
+		3,
+		{ 0, 255 },
+		2,
+		' '
+	};
+
+	Checkbox pager_scan {
+		{ 22 * 8, 13 * 8 },
+		4,
+		"Scan"
+	};
+
+	NumberField field_pager {
+		{ 8 * 8, 14 * 8 },
+		3,
+		{ 0, 255 },
+		2,
+		' '
 	};
 	
 	/*ProgressBar progressbar {

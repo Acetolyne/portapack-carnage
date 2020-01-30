@@ -115,7 +115,10 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 	add_children({
 		&labels,
 		&sym_data,
-		&checkbox_scan,
+		&field_restaurant,
+		&restaurant_scan,
+		&pager_scan,
+		&field_pager,
 		&text_message,
 		&tx_view
 	});
@@ -124,7 +127,7 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 	for (c = 0; c < 16; c++)
 		sym_data.set_sym(c, (data_init[c >> 1] >> ((c & 1) ? 0 : 4)) & 0x0F);
 	
-	checkbox_scan.set_value(false);
+	restaurant_scan.set_value(false);
 	
 	generate_frame();
 	
@@ -137,7 +140,7 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 	
 	tx_view.on_start = [this]() {
 		if (tx_mode == IDLE) {
-			if (checkbox_scan.value())
+			if (restaurant_scan.value())
 				tx_mode = SCAN;
 			else
 				tx_mode = SINGLE;
