@@ -78,7 +78,7 @@ private:
 		{ 13 * 8, 10 * 8 },
 		3,
 		{ 0, 255 },
-		2,
+		1,
 		' '
 	};
 
@@ -92,7 +92,7 @@ private:
 		{ 8 * 8, 14 * 8 },
 		3,
 		{ 0, 255 },
-		2,
+		1,
 		' '
 	};
 	
@@ -101,7 +101,7 @@ private:
 	};*/
 	Text text_message {
 		{ 5 * 8, 13 * 16, 20 * 8, 16 },
-		""
+		"TESTING"
 	};
 	
 	TransmitterView tx_view {
