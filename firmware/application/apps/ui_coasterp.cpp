@@ -28,10 +28,32 @@
 #include <cstring>
 #include <stdio.h>
 #include <bitset>
+#include "string_format.hpp"
+#include <cctype>
+
 
 using namespace portapack;
 
 namespace ui {
+
+std::vector<std::string> Split(const std::string& str)
+{
+   std::vector<std::string> ret;
+   int num = str.length() / 2;
+   for (auto i = 0; i < str.length() / 2; i++)
+   {
+        ret.push_back(str.substr(i * 2, 2));
+   }
+
+   // If there are leftover characters, create a shorter item at the end.
+   if (str.length() % 2 != 0)
+   {
+        ret.push_back(str.substr(2 * num));
+   }
+
+
+   return ret;
+}
 
 void CoasterPagerView::focus() {
 	sym_data.focus();
@@ -67,13 +89,43 @@ void CoasterPagerView::generate_frame() {
 
 void CoasterPagerView::start_tx() {
 	generate_frame();
-	
-	transmitter_model.set_sampling_rate(2280000);
-	transmitter_model.set_rf_amp(true);
-	transmitter_model.set_baseband_bandwidth(1750000);
-	transmitter_model.enable();
+	//int tmp = 200;
+        //char hex_string[20];
+        //char rest_id = {"200"};
+        //std::dec str = std::int("c8");
+        char sink[24] = {"aaaaaafc2d"};
+        /////////////auto i = Split(temp);
+        char pack[1024] = "";
+        std::string rest_id = to_string_hex(field_rest, 2);
+        const char *c = rest_id.c_str();
+	std::string pager_id = to_string_hex(field_page, 3);
+        const char *d = pager_id.c_str();
 
-	baseband::set_fsk_data(19 * 8, 2280000 / 1000, 5000, 32);
+
+        strncat(pack, sink, 24);
+        strncat(pack, c, 32);
+        strcat(pack, "0");
+        strncat(pack, d, 8);
+        //uint16_t baz (std::string("c8"));
+        //std::string j = std::bitset<8>(baz).to_string();
+        //std::string a  = "aa";
+        
+        ////std::string n;
+        ////int t = strlen(temp);
+        ////n = t;
+        //for (int j = 0; j < sizeof(i); ++j)
+        //{
+        text_message.set(pack);
+          //std::string n = std::bitset<2>(i[j]).to_string();
+          
+        //}
+        //text_message.set(n);
+	//transmitter_model.set_sampling_rate(2280000);
+	//transmitter_model.set_rf_amp(true);
+	//transmitter_model.set_baseband_bandwidth(1750000);
+	//transmitter_model.enable();
+
+	//baseband::set_fsk_data(19 * 8, 2280000 / 1000, 5000, 32);
 }
 
 void CoasterPagerView::on_tx_progress(const uint32_t progress, const bool done) {
@@ -132,6 +184,14 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 	
 	generate_frame();
 	
+        field_restaurant.on_change = [this](int32_t v) {
+		field_rest = v;
+	};
+
+        field_pager.on_change = [this](int32_t v) {
+		field_page = v;
+	};
+
 	tx_view.on_edit_frequency = [this, &nav]() {
 		auto new_view = nav.push<FrequencyKeypadView>(receiver_model.tuning_frequency());
 		new_view->on_changed = [this](rf::Frequency f) {

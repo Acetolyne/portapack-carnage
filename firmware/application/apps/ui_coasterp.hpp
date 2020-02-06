@@ -30,6 +30,8 @@
 #include "transmitter_model.hpp"
 #include "portapack.hpp"
 
+#include <bitset>
+
 namespace ui {
 
 class CoasterPagerView : public View {
@@ -53,6 +55,8 @@ private:
 	void start_tx();
 	void generate_frame();
 	void on_tx_progress(const uint32_t progress, const bool done);
+        uint32_t field_rest { };
+        uint32_t field_page { };
 	
 	Labels labels {
 		{ { 1 * 8, 3 * 8 }, "Syscall pager TX beta", Color::light_grey() },
