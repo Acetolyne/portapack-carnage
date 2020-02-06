@@ -57,13 +57,23 @@ private:
 	void on_tx_progress(const uint32_t progress, const bool done);
         uint32_t field_rest { };
         uint32_t field_page { };
+        uint8_t action { };
 	
 	Labels labels {
-		{ { 1 * 8, 3 * 8 }, "Syscall pager TX beta", Color::light_grey() },
+		{ { 1 * 8, 3 * 8 }, "Action:", Color::light_grey() },
 		{ { 30 * 8, 8 * 8 }, "Data:", Color::light_grey() },
 		{ { 1 * 8, 10 * 8 }, "RestaurantId:  /255", Color::light_grey() },
 		{ { 1 * 8, 14 * 8 }, "PagerId:  /1023", Color::light_grey() },
 		{ { 1 * 8, 18 * 8 }, "Alert Type:", Color::light_grey() } //TBD Numbers or list?
+	};
+
+	OptionsField options_action {
+		{ 9 * 8, 3 * 8 },
+		4,
+		{
+			{ "Trigger Alert", 0 },
+			{ "Program Pager", 1 }
+		}
 	};
 	
 	SymField sym_data {
@@ -104,7 +114,7 @@ private:
 		{ 5 * 8, 12 * 16, 20 * 8, 16 },
 	};*/
 	Text text_message {
-		{ 5 * 8, 13 * 16, 20 * 8, 16 },
+		{ 1 * 8, 13 * 16, 20 * 8, 16 },
 		"TESTING"
 	};
 	

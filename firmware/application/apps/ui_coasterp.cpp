@@ -31,6 +31,10 @@
 #include "string_format.hpp"
 #include <cctype>
 
+//@todo on options_action change check state and if program then disable scan buttons
+//@todo on check scan boxes disable tied select field
+//@todo possibly add function to select number for number field if there is a UI for this already besides the freq UI.
+//@todo create a function to lowercase hex values.
 
 using namespace portapack;
 
@@ -93,6 +97,8 @@ void CoasterPagerView::start_tx() {
         //char hex_string[20];
         //char rest_id = {"200"};
         //std::dec str = std::int("c8");
+        text_message.set("");
+        const char *e;
         char sink[24] = {"aaaaaafc2d"};
         /////////////auto i = Split(temp);
         char pack[1024] = "";
@@ -100,14 +106,32 @@ void CoasterPagerView::start_tx() {
         const char *c = rest_id.c_str();
 	std::string pager_id = to_string_hex(field_page, 3);
         const char *d = pager_id.c_str();
+        //e = action.c_str();
+        ////std::string jj = to_string_hex(action, 1);
+        ////const char *j = jj.c_str();
+
+        
 
 
         strncat(pack, sink, 24);
         strncat(pack, c, 32);
         strcat(pack, "0");
         strncat(pack, d, 8);
+	switch (action)
+	{
+		case 0:
+                        strcat(pack, "0000000000");
+			break;
+		case 1:
+                        strncat(pack, "ffffff", 10);
+			break;
+		default:
+			strcat(pack, "0000000000");
+	}
+        strncat(pack, "07", 2);
+        
         //uint16_t baz (std::string("c8"));
-        //std::string j = std::bitset<8>(baz).to_string();
+
         //std::string a  = "aa";
         
         ////std::string n;
@@ -116,6 +140,8 @@ void CoasterPagerView::start_tx() {
         //for (int j = 0; j < sizeof(i); ++j)
         //{
         text_message.set(pack);
+        //IMPORTANT clear the memory after done
+        memset(pack, 0, 1024 * sizeof(char));
           //std::string n = std::bitset<2>(i[j]).to_string();
           
         //}
@@ -126,7 +152,9 @@ void CoasterPagerView::start_tx() {
 	//transmitter_model.enable();
 
 	//baseband::set_fsk_data(19 * 8, 2280000 / 1000, 5000, 32);
+        
 }
+
 
 void CoasterPagerView::on_tx_progress(const uint32_t progress, const bool done) {
 	(void)progress;
@@ -167,6 +195,7 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 	
 	add_children({
 		&labels,
+                &options_action,
 		&sym_data,
 		&field_restaurant,
 		&restaurant_scan,
@@ -176,14 +205,20 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 		&tx_view
 	});
 	
+
 	// Bytes to nibbles
 	for (c = 0; c < 16; c++)
 		sym_data.set_sym(c, (data_init[c >> 1] >> ((c & 1) ? 0 : 4)) & 0x0F);
 	
 	restaurant_scan.set_value(false);
+        pager_scan.set_value(false);
 	
 	generate_frame();
-	
+
+	options_action.on_change = [this](size_t, int value) {
+		action = value;
+	};
+
         field_restaurant.on_change = [this](int32_t v) {
 		field_rest = v;
 	};
