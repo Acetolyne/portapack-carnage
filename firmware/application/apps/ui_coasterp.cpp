@@ -40,6 +40,21 @@ using namespace portapack;
 
 namespace ui {
 
+unsigned int hex2int(char *hex) {
+    unsigned int val = 0;
+    while (*hex) {
+    // get current character then increment
+      unsigned int byte = *hex++;
+      // transform hex character to the 4bit equivalent number,using the ascii table indexes
+      if (byte >= '0' && byte <= '9') byte = byte - '0';
+      else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
+      else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;
+      // shift 4 to make space for new digit, and add the 4 bits of the new digit
+        val = (val << 4) | (byte & 0xF);
+      }
+  return val;
+}
+
 std::vector<std::string> Split(const std::string& str)
 {
    std::vector<std::string> ret;
@@ -100,7 +115,6 @@ void CoasterPagerView::start_tx() {
         text_message.set("");
         const char *e;
         char sink[24] = {"aaaaaafc2d"};
-        /////////////auto i = Split(temp);
         char pack[1024] = "";
         std::string rest_id = to_string_hex(field_rest, 2);
         const char *c = rest_id.c_str();
@@ -139,7 +153,19 @@ void CoasterPagerView::start_tx() {
         ////n = t;
         //for (int j = 0; j < sizeof(i); ++j)
         //{
-        text_message.set(pack);
+ 	//std::string pi = to_string_dec_int(170);  // DEC TO STRING REPRESENTATION OF DEC  170 -> 170
+        // std::string n = std::bitset<8>(170).to_string(); //DEC TO BINARY 8 BIT  170 -> "10101010"
+        // std::string win = to_string_hex(123, 3);  //INT TO 3 BIT HEX STRING  123 -> "07B"
+ 	//std::string winb = to_string_hex(170, 2);  //INT TO 2 BIT HEX  170 -> "AA"
+ 	//std::string v = to_string_bin(170, 8);  //DEC TO BINARY 8 BIT  170 -> "10101010"  ANOTHER WAY
+        ////auto i = Split(pack);
+	//Convert 2 bit hex to decimal number
+        char i[] = "aa";
+        unsigned int xx;
+        xx = hex2int(i);
+	std::string pii = to_string_dec_int(xx);
+	//////////////////
+        text_message.set(pii);
         //IMPORTANT clear the memory after done
         memset(pack, 0, 1024 * sizeof(char));
           //std::string n = std::bitset<2>(i[j]).to_string();
