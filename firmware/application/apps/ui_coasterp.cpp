@@ -40,39 +40,30 @@ using namespace portapack;
 
 namespace ui {
 
-//@todo make this available globally via string_format.cpp
-//unsigned int hex2int(char *hex) {
-//    unsigned int val = 0;
-//    while (*hex) {
-//    // get current character then increment
-//      unsigned int byte = *hex++;
-//      // transform hex character to the 4bit equivalent number,using the ascii table indexes
-//      if (byte >= '0' && byte <= '9') byte = byte - '0';
-//      else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
-//      else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;
-//      // shift 4 to make space for new digit, and add the 4 bits of the new digit
-//        val = (val << 4) | (byte & 0xF);
-//      }
-//  return val;
-//}
-
-std::vector<std::string> Split(const std::string& str)
+long int Split(const std::string& str)
 {
    std::vector<std::string> ret;
    int num = str.length() / 2;
+   int sum = 0;
+   char p[2];
    for (auto i = 0; i < str.length() / 2; i++)
    {
-        ret.push_back(str.substr(i * 2, 2));
+	std::string p = str.substr(i * 2, 2);
+        char cstr[3];
+        strcpy(cstr, p.c_str());
+        sum += hex2int(cstr);
    }
 
    // If there are leftover characters, create a shorter item at the end.
    if (str.length() % 2 != 0)
    {
-        ret.push_back(str.substr(2 * num));
+	std::string p = str.substr(2 * num);
+        char cstr[3];
+        strcpy(cstr, p.c_str());
+        sum += hex2int(cstr);
    }
 
-
-   return ret;
+   return sum;
 }
 
 void CoasterPagerView::focus() {
@@ -160,11 +151,26 @@ void CoasterPagerView::start_tx() {
  	//std::string winb = to_string_hex(170, 2);  //INT TO 2 BIT HEX  170 -> "AA"
  	//std::string v = to_string_bin(170, 8);  //DEC TO BINARY 8 BIT  170 -> "10101010"  ANOTHER WAY
         ////auto i = Split(pack);
-	//Convert 2 bit hex to decimal number
-        char i[] = "aa";
-        unsigned int xx;
-        xx = hex2int(i);
-	std::string pii = to_string_dec_int(xx);
+
+
+
+	////////////////////Convert 2 bit hex to decimal number
+        ////char i[] = "aa";
+	unsigned int xx;
+	long int sum;
+	auto v = Split(pack);
+  	//char arr[] = v.data();
+	//char f;
+  	//for(int i=0; i<v.size(); i++)
+  	//{
+	//  f = arr[i];
+        //  xx = hex2int(f);
+	//  sum += xx;
+  	//}
+
+	
+	
+        std::string pii = to_string_dec_int(v);
 	//////////////////
         text_message.set(pii);
         //IMPORTANT clear the memory after done
