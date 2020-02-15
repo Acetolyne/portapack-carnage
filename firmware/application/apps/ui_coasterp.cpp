@@ -34,7 +34,6 @@
 //@todo on options_action change check state and if program then disable scan buttons
 //@todo on check scan boxes disable tied select field
 //@todo possibly add function to select number for number field if there is a UI for this already besides the freq UI.
-//@todo create a function to lowercase hex values.
 
 using namespace portapack;
 
@@ -42,7 +41,6 @@ namespace ui {
 
 long int getCRC(const std::string& str)
 {
-   std::vector<std::string> ret;
    int num = str.length() / 2;
    int sum = 0;
    char p[2];
@@ -100,25 +98,14 @@ void CoasterPagerView::generate_frame() {
 
 void CoasterPagerView::start_tx() {
 	generate_frame();
-	//int tmp = 200;
-        //char hex_string[20];
-        //char rest_id = {"200"};
-        //std::dec str = std::int("c8");
-        text_message.set("");
         const char *e;
         char sink[24] = {"aaaaaafc2d"};
+	//@todo change end of sink based on programing or alerting.
         char pack[1024] = "";
         std::string rest_id = to_string_hex(field_rest, 2);
         const char *c = rest_id.c_str();
 	std::string pager_id = to_string_hex(field_page, 3);
         const char *d = pager_id.c_str();
-        //e = action.c_str();
-        ////std::string jj = to_string_hex(action, 1);
-        ////const char *j = jj.c_str();
-
-        
-
-
         strncat(pack, sink, 24);
         strncat(pack, c, 32);
         strcat(pack, "0");
@@ -167,51 +154,14 @@ void CoasterPagerView::start_tx() {
 		default:
 			strcat(pack, "01");
 	}
-        
-        //uint16_t baz (std::string("c8"));
 
-        //std::string a  = "aa";
-        
-        ////std::string n;
-        ////int t = strlen(temp);
-        ////n = t;
-        //for (int j = 0; j < sizeof(i); ++j)
-        //{
- 	//std::string pi = to_string_dec_int(170);  // DEC TO STRING REPRESENTATION OF DEC  170 -> 170
-        // std::string n = std::bitset<8>(170).to_string(); //DEC TO BINARY 8 BIT  170 -> "10101010"
-        // std::string win = to_string_hex(123, 3);  //INT TO 3 BIT HEX STRING  123 -> "07B"
- 	//std::string winb = to_string_hex(170, 2);  //INT TO 2 BIT HEX  170 -> "AA"
- 	//std::string v = to_string_bin(170, 8);  //DEC TO BINARY 8 BIT  170 -> "10101010"  ANOTHER WAY
-        ////auto i = Split(pack);
-
-
-
-	////////////////////Convert 2 bit hex to decimal number
-        ////char i[] = "aa";
+	//Get the checksum
 	unsigned int xx;
 	long int sum;
 	auto v = getCRC(pack);
         sum = v % 255;
 	std::string b = std::bitset<8>(sum).to_string();
-  	//char arr[] = v.data();
-	//char f;
-  	//for(int i=0; i<v.size(); i++)
-  	//{
-	//  f = arr[i];
-        //  xx = hex2int(f);
-	//  sum += xx;
-  	//}
-
-	
-	
-	//////////////////
         text_message.set(b);
-        //IMPORTANT clear the memory after done
-        memset(pack, 0, 1024 * sizeof(char));
-          //std::string n = std::bitset<2>(i[j]).to_string();
-          
-        //}
-        //text_message.set(n);
 	//transmitter_model.set_sampling_rate(2280000);
 	//transmitter_model.set_rf_amp(true);
 	//transmitter_model.set_baseband_bandwidth(1750000);
