@@ -58,6 +58,7 @@ private:
         uint32_t field_rest { };
         uint32_t field_page { };
         uint8_t action { };
+	uint8_t alert { };
 	
 	Labels labels {
 		{ { 1 * 8, 3 * 8 }, "Action:", Color::light_grey() },
@@ -108,6 +109,22 @@ private:
 		{ 0, 255 },
 		1,
 		' '
+	};
+
+	OptionsField options_alert {
+		{ 13 * 8, 18 * 8 },
+		20,
+		{
+			{ "Flash 30 Seconds", 1 },
+			{ "Flash 5 Minutes", 2 },
+			{ "Flash/Beep 5X5", 3 },
+			{ "Beep 3 Times", 4 },
+			{ "Beep 5 Minutes", 5 },
+			{ "Glow 5 Minutes", 6 },
+			{ "Glow/Vib 15 Times", 7 },
+			{ "Flash/Vib 1 Second", 10 },
+			{ "beep 3 times", 68 }
+		}
 	};
 	
 	/*ProgressBar progressbar {

@@ -40,7 +40,7 @@ using namespace portapack;
 
 namespace ui {
 
-long int Split(const std::string& str)
+long int getCRC(const std::string& str)
 {
    std::vector<std::string> ret;
    int num = str.length() / 2;
@@ -134,7 +134,39 @@ void CoasterPagerView::start_tx() {
 		default:
 			strcat(pack, "0000000000");
 	}
-        strncat(pack, "07", 2);
+        ////strncat(pack, "07", 2);
+	switch (alert)
+	{
+		case 1:
+                        strcat(pack, "01");
+			break;
+		case 2:
+                        strcat(pack, "02");
+			break;
+		case 3:
+                        strcat(pack, "03");
+			break;
+		case 4:
+                        strcat(pack, "04");
+			break;
+		case 5:
+                        strcat(pack, "05");
+			break;
+		case 6:
+                        strcat(pack, "06");
+			break;
+		case 7:
+                        strcat(pack, "07");
+			break;
+		case 10:
+                        strcat(pack, "0a");
+			break;
+		case 68:
+                        strcat(pack, "44");
+			break;
+		default:
+			strcat(pack, "01");
+	}
         
         //uint16_t baz (std::string("c8"));
 
@@ -158,7 +190,9 @@ void CoasterPagerView::start_tx() {
         ////char i[] = "aa";
 	unsigned int xx;
 	long int sum;
-	auto v = Split(pack);
+	auto v = getCRC(pack);
+        sum = v % 255;
+	std::string b = std::bitset<8>(sum).to_string();
   	//char arr[] = v.data();
 	//char f;
   	//for(int i=0; i<v.size(); i++)
@@ -170,9 +204,8 @@ void CoasterPagerView::start_tx() {
 
 	
 	
-        std::string pii = to_string_dec_int(v);
 	//////////////////
-        text_message.set(pii);
+        text_message.set(b);
         //IMPORTANT clear the memory after done
         memset(pack, 0, 1024 * sizeof(char));
           //std::string n = std::bitset<2>(i[j]).to_string();
@@ -235,7 +268,8 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 		&pager_scan,
 		&field_pager,
 		&text_message,
-		&tx_view
+		&tx_view,
+		&options_alert
 	});
 	
 
@@ -254,6 +288,10 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 
         field_restaurant.on_change = [this](int32_t v) {
 		field_rest = v;
+	};
+
+	options_alert.on_change = [this](size_t, int value) {
+		alert = value;
 	};
 
         field_pager.on_change = [this](int32_t v) {
