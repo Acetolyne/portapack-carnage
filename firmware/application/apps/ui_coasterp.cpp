@@ -74,30 +74,6 @@ CoasterPagerView::~CoasterPagerView() {
 }
 
 void CoasterPagerView::generate_frame() {
-	uint8_t frame[19];
-	uint32_t c;
-	
-	// Preamble (8 bytes)
-	for (c = 0; c < 8; c++)
-		frame[c] = 0x55;		// Isn't this 0xAA ?
-	
-	// Sync word
-	frame[8] = 0x2D;
-	frame[9] = 0xD4;
-	
-	// Data length
-	frame[10] = 8;
-	
-	// Data
-	for (c = 0; c < 8; c++)
-		frame[c + 11] = (sym_data.get_sym(c * 2) << 4) | sym_data.get_sym(c * 2 + 1);
-
-	// Copy for baseband
-	memcpy(shared_memory.bb_data.data, frame, 19);
-}
-
-void CoasterPagerView::start_tx() {
-	generate_frame();
         const char *e;
         char sink[24] = {"aaaaaafc2d"};
 	//@todo change end of sink based on programing or alerting.
@@ -156,18 +132,35 @@ void CoasterPagerView::start_tx() {
 	}
 
 	//Get the checksum
+        int curtmp;
 	unsigned int xx;
 	long int sum;
 	auto v = getCRC(pack);
         sum = v % 255;
 	std::string b = std::bitset<8>(sum).to_string();
-        text_message.set(b);
-	//transmitter_model.set_sampling_rate(2280000);
-	//transmitter_model.set_rf_amp(true);
-	//transmitter_model.set_baseband_bandwidth(1750000);
-	//transmitter_model.enable();
+	const char *bb = b.c_str();
+	strcat(pack, bb);
+	char tmp[541] = {0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0,0,1,1,0,0,1,0,1,1,0,0,1,1,0,1,0,1,0,1,0,0,1,0,1,1,0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,1,0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,0,0,1,1,0,1,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	//strcat(tmp, "011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100101010101011010101001100101100110101010010110011010101010101010101010100101100110101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010100110011010100110010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+	////manchester_encode(bin_ptr + 16, raw_ptr, 112, 0)
+        text_message.set(pack);
 
-	//baseband::set_fsk_data(19 * 8, 2280000 / 1000, 5000, 32);
+	// Copy for baseband
+	memcpy(shared_memory.bb_data.data, tmp, 541);
+}
+
+void CoasterPagerView::start_tx() {
+	
+
+	generate_frame();
+	transmitter_model.set_sampling_rate(2280000);
+	transmitter_model.set_rf_amp(true);
+	transmitter_model.set_baseband_bandwidth(1750000);
+	transmitter_model.enable();
+
+	baseband::set_fsk_data(541 * 8, 2280000 / 9600, 3190, 100);
+	//progressbar.set_value(100);
+
         
 }
 
@@ -177,7 +170,9 @@ void CoasterPagerView::on_tx_progress(const uint32_t progress, const bool done) 
 	
 	uint16_t address = 0;
 	uint32_t c;
-	
+	//transmitter_model.disable();
+	//tx_mode = IDLE;
+	//tx_view.set_transmitting(false);
 	if (done) {
 		if (tx_mode == SINGLE) {
 			transmitter_model.disable();
@@ -219,7 +214,8 @@ CoasterPagerView::CoasterPagerView(NavigationView& nav) {
 		&field_pager,
 		&text_message,
 		&tx_view,
-		&options_alert
+		&options_alert,
+		&progressbar
 	});
 	
 

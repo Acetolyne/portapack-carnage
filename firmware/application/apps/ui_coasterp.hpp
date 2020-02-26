@@ -127,9 +127,9 @@ private:
 		}
 	};
 	
-	/*ProgressBar progressbar {
+	ProgressBar progressbar {
 		{ 5 * 8, 12 * 16, 20 * 8, 16 },
-	};*/
+	};
 	Text text_message {
 		{ 1 * 8, 13 * 16, 20 * 8, 16 },
 		"TESTING"
