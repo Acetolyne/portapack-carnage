@@ -65,3 +65,7 @@ CMakeFiles/
 .DS_Store
 /firmware/CMakeCache.txt
 /sdcard/ADSB/airlines.txt
+
+#Custom ignores
+todo
+

@@ -53,6 +53,8 @@ std::string to_string_datetime(const rtc::RTC& value, const TimeFormat format = 
 std::string to_string_timestamp(const rtc::RTC& value);
 std::string to_string_FAT_timestamp(const FATTimestamp& timestamp);
 
+unsigned int hex2int(char *hex);
+
 std::string unit_auto_scale(double n, const uint32_t base_nano, uint32_t precision);
 
 #endif/*__STRING_FORMAT_H__*/

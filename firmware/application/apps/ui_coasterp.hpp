@@ -30,6 +30,8 @@
 #include "transmitter_model.hpp"
 #include "portapack.hpp"
 
+#include <bitset>
+
 namespace ui {
 
 class CoasterPagerView : public View {
@@ -39,7 +41,7 @@ public:
 	
 	void focus() override;
 	
-	std::string title() const override { return "Si44xx transmit"; };
+	std::string title() const override { return "Pager transmit"; };
 
 private:
 	enum tx_modes {
@@ -53,30 +55,84 @@ private:
 	void start_tx();
 	void generate_frame();
 	void on_tx_progress(const uint32_t progress, const bool done);
+        uint32_t field_rest { };
+        uint32_t field_page { };
+        uint8_t action { };
+	uint8_t alert { };
 	
 	Labels labels {
-		{ { 1 * 8, 3 * 8 }, "Syscall pager TX beta", Color::light_grey() },
-		{ { 1 * 8, 8 * 8 }, "Data:", Color::light_grey() }
+		{ { 1 * 8, 3 * 8 }, "Action:", Color::light_grey() },
+		{ { 30 * 8, 8 * 8 }, "Data:", Color::light_grey() },
+		{ { 1 * 8, 10 * 8 }, "RestaurantId:  /255", Color::light_grey() },
+		{ { 1 * 8, 14 * 8 }, "PagerId:  /1023", Color::light_grey() },
+		{ { 1 * 8, 18 * 8 }, "Alert Type:", Color::light_grey() } //TBD Numbers or list?
+	};
+
+	OptionsField options_action {
+		{ 9 * 8, 3 * 8 },
+		4,
+		{
+			{ "Trigger Alert", 0 },
+			{ "Program Pager", 1 }
+		}
 	};
 	
 	SymField sym_data {
-		{ 7 * 8, 8 * 8 },
+		{ 30 * 8, 8 * 8 },
 		16,		// 14 ? 12 ?
 		SymField::SYMFIELD_HEX
 	};
 	
-	Checkbox checkbox_scan {
-		{ 10 * 8, 14 * 8 },
+	Checkbox restaurant_scan {
+		{ 22 * 8, 9 * 8 },
 		4,
 		"Scan"
 	};
+
+	NumberField field_restaurant {
+		{ 13 * 8, 10 * 8 },
+		3,
+		{ 0, 255 },
+		1,
+		' '
+	};
+
+	Checkbox pager_scan {
+		{ 22 * 8, 13 * 8 },
+		4,
+		"Scan"
+	};
+
+	NumberField field_pager {
+		{ 8 * 8, 14 * 8 },
+		3,
+		{ 0, 255 },
+		1,
+		' '
+	};
+
+	OptionsField options_alert {
+		{ 13 * 8, 18 * 8 },
+		20,
+		{
+			{ "Flash 30 Seconds", 1 },
+			{ "Flash 5 Minutes", 2 },
+			{ "Flash/Beep 5X5", 3 },
+			{ "Beep 3 Times", 4 },
+			{ "Beep 5 Minutes", 5 },
+			{ "Glow 5 Minutes", 6 },
+			{ "Glow/Vib 15 Times", 7 },
+			{ "Flash/Vib 1 Second", 10 },
+			{ "beep 3 times", 68 }
+		}
+	};
 	
-	/*ProgressBar progressbar {
+	ProgressBar progressbar {
 		{ 5 * 8, 12 * 16, 20 * 8, 16 },
-	};*/
+	};
 	Text text_message {
-		{ 5 * 8, 13 * 16, 20 * 8, 16 },
-		""
+		{ 1 * 8, 13 * 16, 20 * 8, 16 },
+		"TESTING"
 	};
 	
 	TransmitterView tx_view {
