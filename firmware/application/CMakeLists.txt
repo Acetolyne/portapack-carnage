@@ -243,6 +243,7 @@ set(CPPSRC
 	apps/ui_sonde.cpp
 	apps/ui_sstvtx.cpp
 	# apps/ui_test.cpp
+	apps/ui_testui.cpp
 	apps/ui_tone_search.cpp
 	apps/ui_touch_calibration.cpp
 	apps/ui_touchtunes.cpp
