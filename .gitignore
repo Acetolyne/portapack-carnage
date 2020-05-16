@@ -58,8 +58,7 @@ CMakeFiles/
 .gdbinit*
 
 # Editor files
-*.sublime-project
-*.sublime-workspace
+*.vscode
 
 # Host OS turds
 .DS_Store

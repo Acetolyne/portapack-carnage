@@ -40,6 +40,13 @@ For example in this below option field the number 20 is where we specify the len
 		}
 	};
 
+CREATING NEW APPS
+
+New apps should be put in the apps folder 
+You will need 2 files app_name.cpp and app_name.hpp where app_name is the actual applications app_name
+Once the view is created you will need to add it to the according manu in ui_navigation.cpp
+The link should point to the View that is initialized in your app_name.cpp file
+The application will also need to be added to the file firmware/application/CMakeLists.txt
 
 
 
