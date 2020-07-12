@@ -1,29 +1,29 @@
-This file to conatin notes to aide in development of new modules
+This file to contain notes to aide in development of new modules
 
-EXAMPLE CONVERSIONS
+## EXAMPLE CONVERSIONS
 
-
+```c++
 std::string pi = to_string_dec_int(170);  // DEC TO STRING REPRESENTATION OF DEC  170 -> 170
 std::string n = std::bitset<8>(170).to_string(); //DEC TO BINARY 8 BIT  170 -> "10101010"
 std::string win = to_string_hex(123, 3);  //INT TO 3 BIT HEX STRING  123 -> "07B"
 std::string winb = to_string_hex(170, 2);  //INT TO 2 BIT HEX  170 -> "AA"
 std::string v = to_string_bin(170, 8);  //DEC TO BINARY 8 BIT  170 -> "10101010"  ANOTHER WAY
-
+```
 
 Using the below include will give you additional string operations see string_format.cpp for details
-
+```c++
 #include "string_format.hpp"
 
 hex2int(char *hex)  //Converts a hex string into the int decimal value
+```
 
-
-A NOTE ABOUT UI FIELDS
+## A NOTE ABOUT UI FIELDS
 
 When specifying new fields in the UI under the hpp file there is an option for the field length.
 If this is set to short then going from a shorter value to a longer value will work but when going from a longer value o a shorter the extra characters will remain on the screen so the wrong value is shown. To avoid this set the value to the length of the longest value.
 
 For example in this below option field the number 20 is where we specify the length of the UI field. If it was not large enough the going from the string "Flash/Beep 5X5" to "Beep 3 Times" would end up showing "Beep 3 TimesX5" because the X5 was not overwritten by any characters from the shorter string.
-
+```c++
 	OptionsField options_alert {
 		{ 13 * 8, 18 * 8 },
 		20,
@@ -39,14 +39,12 @@ For example in this below option field the number 20 is where we specify the len
 			{ "beep 3 times", 68 }
 		}
 	};
-
-CREATING NEW APPS
+```
+## CREATING NEW APPS
 
 New apps should be put in the apps folder 
 You will need 2 files app_name.cpp and app_name.hpp where app_name is the actual applications app_name
 Once the view is created you will need to add it to the according manu in ui_navigation.cpp
 The link should point to the View that is initialized in your app_name.cpp file
 The application will also need to be added to the file firmware/application/CMakeLists.txt
-
-
 
