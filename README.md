@@ -1,8 +1,5 @@
 # PortaPack Carnage
 
-[![Build Status](https://travis-ci.com/eried/portapack-mayhem.svg?branch=master)](https://travis-ci.com/eried/portapack-mayhem) [![buddy pipeline](https://app.buddy.works/eried/portapack/pipelines/pipeline/252276/badge.svg?token=48cd59d53de0589a8fbe26bc751d77a59a011cf72581da049343879402991c34 "buddy pipeline")](https://app.buddy.works/eried/portapack/pipelines/pipeline/252276) [![CodeScene Code Health](https://codescene.io/projects/8381/status-badges/code-health)](https://codescene.io/projects/8381) [![Docker Hub Pulls](https://img.shields.io/docker/pulls/eried/portapack.svg)](https://hub.docker.com/r/eried/portapack)
-[![Discord Chat](https://img.shields.io/discord/719669764804444213.svg)](https://discord.gg/fU9PsKW)  
-
 This is a fork of the [Mayhem](https://github.com/eried/portapack-mayhem/) firmware, which itself was a fork of the [PortaPack](https://github.com/sharebrained/portapack-hackrf) firmware, an add-on for the [HackRF](http://greatscottgadgets.com/hackrf/). A fork is a derivate, in this case one that has extra features and fixes when compared to the older versions.
 
 [<img src="https://raw.githubusercontent.com/wiki/eried/portapack-mayhem/img/hw_overview_h2_front.png" height="400">](https://github.com/eried/portapack-mayhem/wiki/Hardware-overview) [<img src="https://raw.githubusercontent.com/wiki/eried/portapack-mayhem/img/hw_overview_h2_inside.png" height="400">](https://github.com/eried/portapack-mayhem/wiki/Hardware-overview#portapack-internals)
@@ -11,9 +8,6 @@ This is a fork of the [Mayhem](https://github.com/eried/portapack-mayhem/) firmw
 
 # Quick overview
 
-If you are new to *HackRF+PortaPack+Mayhem*, there is an awesome introductory video by [Tech Minds](https://www.youtube.com/channel/UC9a8Z6Sp6eb2s3O79pX5Zvg) available:
-
-[![Setup and overview](https://img.youtube.com/vi/kjFB58Y1TAo/0.jpg)](https://www.youtube.com/watch?v=kjFB58Y1TAo)
 
 ## Does it work on H1/H2 PortaPack?
 
