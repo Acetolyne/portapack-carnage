@@ -26,6 +26,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <algorithm>
+#undef assert
 #include <complex>
 #include <memory>
 
