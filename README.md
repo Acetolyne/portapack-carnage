@@ -50,14 +50,16 @@ cd portapack-hackrf
 Make a "build" directory and initialize the CMake build files into that directory:
 
 mkdir build
+
 cd build
+
 cmake ..
 
 Make the SPI flash binary image (which builds the bootstrap, application, and baseband binaries):
 
 make firmware
 
-The binary will be at "firmware/portapack-h1-havoc.bin". under the build directory that you are currently in. (TODO binary location possibly needs updated)
+The binary will be at "firmware/portapack-carnage.bin". under the build directory that you are currently in.
 
 ## Flashing Firmware
 
@@ -92,7 +94,7 @@ When finished, press the reset button on the HackRF. The PortaPack code is now r
 
 2. cd to the firmware
 
-2. Flash the havoc firmware with ```hackrf_spiflash -w portapack-h1-havoc.bin``` (TODO again file name may be different now)
+2. Flash the carnage firmware with ```hackrf_spiflash -w portapack-carnage.bin```
 
 - If the hackrf_spiflash program is not available you have not built it yet. follow the directions below then try reflashing with the above command.
 
