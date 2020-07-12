@@ -61,7 +61,8 @@
 #include "ui_siggen.hpp"
 #include "ui_sonde.hpp"
 #include "ui_sstvtx.hpp"
-//#include "ui_test.hpp"
+#include "ui_test.hpp"
+#include "ui_testui.hpp"
 #include "ui_tone_search.hpp"
 #include "ui_touchtunes.hpp"
 #include "ui_view_wav.hpp"
@@ -428,7 +429,8 @@ TransmittersMenuView::TransmittersMenuView(NavigationView& nav) {
 		{ "SSTV", 			ui::Color::green(), 	&bitmap_icon_sstv,		[&nav](){ nav.push<SSTVTXView>(); } },
 		{ "TEDI/LCR",		ui::Color::yellow(), 	&bitmap_icon_lcr,		[&nav](){ nav.push<LCRView>(); } },
 		{ "TouchTune",		ui::Color::yellow(),	&bitmap_icon_remote,	[&nav](){ nav.push<TouchTunesView>(); } },
-		//{ "Remote",			ui::Color::dark_grey(),	&bitmap_icon_remote,	[&nav](){ nav.push<RemoteView>(); } },
+		{ "Remote",			ui::Color::dark_grey(),	&bitmap_icon_remote,	[&nav](){ nav.push<RemoteView>(); } },
+		{ "TestUI", 		ui::Color::cyan(),			nullptr,	 			[&nav](){ nav.push<TestUIView>(); } },
 	});
 }
 
@@ -475,7 +477,7 @@ SystemMenuView::SystemMenuView(NavigationView& nav) {
 		{ "Options", 	ui::Color::cyan(),			&bitmap_icon_setup,	  	[&nav](){ nav.push<SettingsMenuView>(); } },
 		{ "Debug",		ui::Color::light_grey(),		&bitmap_icon_debug,   				[&nav](){ nav.push<DebugMenuView>(); } },
 		{ "HackRF", 	ui::Color::cyan(),			&bitmap_icon_hackrf,	[this, &nav](){ hackrf_mode(nav); } },
-		//{ "About", 		ui::Color::cyan(),			nullptr,				[&nav](){ nav.push<AboutView>(); } }
+		{ "About", 		ui::Color::cyan(),			nullptr,	 			[&nav](){ nav.push<AboutView>(); } },
 	});
 	set_max_rows(2); // allow wider buttons
 	//set_highlighted(1);		// Startup selection
