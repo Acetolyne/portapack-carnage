@@ -59,8 +59,13 @@ CMakeFiles/
 # Editor files
 *.sublime-project
 *.sublime-workspace
-.vscode
+*.vscode
 
 # Host OS leftovers
 .DS_Store
 /firmware/CMakeCache.txt
+/sdcard/ADSB/airlines.txt
+
+#Custom ignores
+todo
+

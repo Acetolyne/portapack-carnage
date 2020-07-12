@@ -161,6 +161,23 @@ void KeyfobView::on_make_change(size_t index) {
 	(void)index;
 }
 
+void KeyfobView::on_tx_change(uint32_t value) {
+	long long int tf;
+	switch (value)
+	{
+		case 1:
+			tf = 315000000;
+			break;
+		case 2:
+			tf = 433920000;
+			break;
+		default:
+			tf = 433920000;
+	}
+	transmitter_model.set_tuning_frequency(tf);
+	tx_view.field_frequency.set_value(transmitter_model.tuning_frequency());
+}
+
 // DEBUG
 void KeyfobView::update_symfields() {
 	for (size_t i = 0; i < 5; i++) {
@@ -209,11 +226,11 @@ KeyfobView::KeyfobView(
 		&options_command,
 		&field_payload_a,
 		&field_payload_b,
+		&options_tx,
 		&text_status,
 		&progressbar,
 		&tx_view
 	});
-	
 	frame[0] = 0x55;
 	update_symfields();
 	
@@ -224,10 +241,16 @@ KeyfobView::KeyfobView(
 	options_command.on_change = [this](size_t, int32_t value) {
 		on_command_change(value);
 	};
+
+	options_tx.on_change = [this](size_t, int32_t value) {
+		on_tx_change(value);
+	};
 	
 	options_make.set_selected_index(0);
+	options_tx.set_selected_index(0);
+	tx_view.field_frequency.set_value(transmitter_model.tuning_frequency());
 	
-	transmitter_model.set_tuning_frequency(433920000);	// Fixed 433.92MHz
+	//transmitter_model.set_tuning_frequency(433920000);	// Fixed 433.92MHz
 	
 	tx_view.on_edit_frequency = [this, &nav]() {
 		auto new_view = nav.push<FrequencyKeypadView>(transmitter_model.tuning_frequency());

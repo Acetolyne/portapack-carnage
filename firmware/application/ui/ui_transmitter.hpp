@@ -71,6 +71,10 @@ public:
 	
 	void set_transmitting(const bool transmitting);
 
+	FrequencyField field_frequency {
+		{ 0, 1 * 8 }
+	};
+
 private:
 	const Style style_start {
 		.font = font::fixed_8x16,
@@ -106,9 +110,7 @@ private:
 	bool lock_ { false };
 	bool transmitting_ { false };
 	
-	FrequencyField field_frequency {
-		{ 0, 1 * 8 }
-	};
+
 	
 	Text text_gain {
 		{ 0, 3 * 8, 5 * 8, 1 * 16 },

@@ -54,6 +54,7 @@ private:
 	void update_progress(const uint32_t progress);
 	void on_make_change(size_t index);
 	void on_command_change(uint32_t value);
+	void on_tx_change(uint32_t value);
 	
 	// DEBUG
 	void update_symfields();
@@ -68,16 +69,19 @@ private:
 	Labels labels {
 		{ { 5 * 8, 1 * 16 }, "Make:", Color::light_grey() },
 		{ { 2 * 8, 2 * 16 }, "Command:", Color::light_grey() },
-		{ { 2 * 8, 4 * 16 }, "Payload:       #####", Color::light_grey() },
-		{ { 2 * 8, 7 * 16 }, "Checksum is fixed just", Color::light_grey() },
-		{ { 2 * 8, 8 * 16 }, "before transmission.", Color::light_grey() },
+		{ { 2 * 8, 3 * 16 }, "Freq:", Color::light_grey() },
+		{ { 2 * 8, 5 * 16 }, "Payload:       #####", Color::light_grey() },
+		{ { 2 * 8, 8 * 16 }, "Checksum is fixed just", Color::light_grey() },
+		{ { 2 * 8, 9 * 16 }, "before transmission.", Color::light_grey() },
 	};
 
 	OptionsField options_make {
 		{ 10 * 8, 1 * 16 },
 		8,
 		{
-			{ "Subaru", 0 }
+			{ "Subaru", 0 },
+			{ "Chrysler", 1 },
+			{ "Chevy", 2 }
 		}
 	};
 	
@@ -89,6 +93,15 @@ private:
 			{ "Unlock", 2 },
 			{ "Trunk", 11 },
 			{ "Panic", 10 }
+		}
+	};
+
+	OptionsField options_tx {
+		{ 10 * 8, 3 * 16 },
+		10,
+		{
+			{ "315 MHz", 1 },
+			{ "433.92 MHz", 2 }
 		}
 	};
 	
