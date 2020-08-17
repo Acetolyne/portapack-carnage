@@ -114,31 +114,38 @@ private:
 	NavigationView& nav_;
 
 	Rectangle backdrop {
-		{ 0 * 8, 0 * 16, 240, 16 },
-		Color::dark_grey()
+		{ 0 * 8, 0 * 16, 240, 32 },
+		Color::black()
 	};
 
-	ImageButton button_back {
-		{ 2, 0 * 16, 16, 16 },
+	ImageButton button_show {
+		{ 224, 0 * 16, 32, 32 },
 		&bitmap_icon_previous,
 		Color::white(),
 		Color::dark_grey()
 	};
 
+	ImageButton button_back {
+		{ 4, 0 * 16, 32, 32 },
+		&bitmap_icon_previous,
+		Color::yellow(),
+		Color::dark_grey()
+	};
+
 	Text title {
-		{ 20, 0, 14 * 8, 1 * 16 },
+		{ 20, 0, 14 * 8, 2 * 16 },
 		default_title,
 	};
 
 	ImageButton button_speaker {
- 		{ 17 * 8, 0, 2 * 8, 1 * 16 },
+ 		{ 17 * 8, 0, 32, 32 },
  		&bitmap_icon_speaker_mute,
  		Color::light_grey(),
  		Color::dark_grey()
  	};
 	
 	ImageButton button_stealth {
-		{ 19 * 8, 0, 2 * 8, 1 * 16 },
+		{ 19 * 8, 0, 32, 32 },
 		&bitmap_icon_stealth,
 		Color::light_grey(),
 		Color::dark_grey()
@@ -152,35 +159,42 @@ private:
 	};*/
 
 	ImageButton button_camera {
-		{ 21 * 8, 0, 2 * 8, 1 * 16 },
+		{ 21 * 8, 0, 32, 32 },
 		&bitmap_icon_camera,
 		Color::white(),
 		Color::dark_grey()
 	};
 
 	ImageButton button_sleep {
-		{ 23 * 8, 0, 2 * 8, 1 * 16 },
+		{ 19 * 8, 0, 32, 32 },
 		&bitmap_icon_sleep,
 		Color::white(),
 		Color::dark_grey()
 	};
 	
 	ImageButton button_bias_tee {
-		{ 25 * 8, 0, 12, 1 * 16 },
+		{ 21 * 8, 0, 32, 32 },
 		&bitmap_icon_biast_off,
 		Color::light_grey(),
 		Color::dark_grey()
 	};
 	
 	Image image_clock_status {
-		{ 27 * 8, 0 * 16,  2 * 8, 1 * 16 },
+		{ 23 * 8, 0 * 16,  32, 32 },
 		&bitmap_icon_clk_int,
 		Color::light_grey(),
 		Color::dark_grey()
 	};
 	
 	SDCardStatusView sd_card_status_view {
-		{ 28 * 8, 0 * 16,  2 * 8, 1 * 16 }
+		{ 25 * 8, 0 * 16,  32, 32 }
+	};
+
+	ImageButton button_hide {
+		{ 224, 0 * 16, 32, 32 },
+		&bitmap_icon_previous,
+		Color::dark_red(),
+		Color::dark_grey()
 	};
 
 	void on_speaker();
@@ -189,6 +203,8 @@ private:
 	//void on_textentry();
 	void on_camera();
 	void refresh();
+	void menu_hide();
+	void menu_show();
 	
 	MessageHandlerRegistration message_handler_refresh {
 		Message::ID::StatusRefresh,

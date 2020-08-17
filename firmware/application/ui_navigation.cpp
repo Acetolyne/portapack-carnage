@@ -104,16 +104,18 @@ SystemStatusView::SystemStatusView(
 	
 	add_children({
 		&backdrop,
+		&button_show,
 		&button_back,
 		&title,
 		&button_speaker,
 		&button_stealth,
 		//&button_textentry,
-		&button_camera,
-		&button_sleep,
+		//&button_camera,
+		//&button_sleep,
 		&button_bias_tee,
 		&image_clock_status,
 		&sd_card_status_view,
+		&button_hide,
 	});
 	
 	if (portapack::persistent_memory::config_speaker()) 
@@ -163,6 +165,44 @@ SystemStatusView::SystemStatusView(
 		DisplaySleepMessage message;
 		EventDispatcher::send_message(message);
 	};
+
+	button_hide.on_select = [this](ImageButton&) {
+		this->menu_hide();
+	};
+
+	button_show.on_select = [this](ImageButton&) {
+		this->menu_show();
+	};
+}
+
+void SystemStatusView::menu_hide() {
+	button_back.hidden(true);
+	button_speaker.hidden(true);
+	button_stealth.hidden(true);
+	button_bias_tee.hidden(true);
+	button_camera.hidden(true);
+	title.hidden(true);
+	button_sleep.hidden(true);
+	image_clock_status.hidden(true);
+	sd_card_status_view.hidden(true);
+	button_hide.hidden(true);
+	button_show.hidden(false);
+	this->set_dirty();
+}
+
+void SystemStatusView::menu_show() {
+	button_back.hidden(false);
+	button_speaker.hidden(false);
+	button_stealth.hidden(false);
+	button_bias_tee.hidden(false);
+	button_camera.hidden(false);
+	title.hidden(false);
+	button_sleep.hidden(false);
+	image_clock_status.hidden(false);
+	sd_card_status_view.hidden(false);
+	button_show.hidden(true);
+	button_hide.hidden(false);
+	this->set_dirty();
 }
 
 void SystemStatusView::refresh() {
@@ -189,7 +229,7 @@ void SystemStatusView::refresh() {
 		image_clock_status.set_bitmap(&bitmap_icon_clk_int);
 		button_bias_tee.set_foreground(ui::Color::light_grey());
 	}
-	
+	this->menu_hide();
 	set_dirty();
 }
 
@@ -516,6 +556,7 @@ SystemView::SystemView(
 	navigation_view.on_view_changed = [this](const View& new_view) {
 		this->status_view.set_back_enabled(!this->navigation_view.is_top());
 		this->status_view.set_title(new_view.title());
+		
 	};
 
 	// portapack::persistent_memory::set_playdead_sequence(0x8D1);
