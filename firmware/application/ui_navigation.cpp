@@ -196,7 +196,7 @@ void SystemStatusView::menu_show() {
 	button_stealth.hidden(false);
 	button_bias_tee.hidden(false);
 	button_camera.hidden(false);
-	title.hidden(false);
+	title.hidden(true);
 	button_sleep.hidden(false);
 	image_clock_status.hidden(false);
 	sd_card_status_view.hidden(false);
