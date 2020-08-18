@@ -139,6 +139,7 @@ SystemStatusView::SystemStatusView(
 	button_back.on_select = [this](ImageButton&){
 		if (this->on_back)
 			this->on_back();
+
 	};
 	
 	button_speaker.on_select = [this](ImageButton&) {
@@ -191,8 +192,7 @@ void SystemStatusView::menu_hide() {
 }
 
 void SystemStatusView::menu_show() {
-	//this->set_back_enabled(!this->navigation_view.is_top()); //@todo set the back button as enabled or not
-	button_back.hidden(false);
+	button_back.hidden(button_back.focusable());
 	button_speaker.hidden(false);
 	button_stealth.hidden(false);
 	button_bias_tee.hidden(false);
@@ -235,8 +235,9 @@ void SystemStatusView::refresh() {
 }
 
 void SystemStatusView::set_back_enabled(bool new_value) {
-	button_back.hidden(new_value ? false : true);
-	button_back.set_focusable(new_value);
+	button_back.set_focusable(!new_value);
+	button_back.hidden(!new_value);
+	menu_hide();
 }
 
 void SystemStatusView::set_title(const std::string new_value) {
@@ -548,6 +549,7 @@ SystemView::SystemView(
 	});
 	status_view.on_back = [this]() {
 		this->navigation_view.pop();
+		//todo hide the menu again?
 	};
 
 	add_child(&navigation_view);
