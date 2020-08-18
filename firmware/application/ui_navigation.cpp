@@ -110,8 +110,8 @@ SystemStatusView::SystemStatusView(
 		&button_speaker,
 		&button_stealth,
 		//&button_textentry,
-		//&button_camera,
-		//&button_sleep,
+		&button_camera,
+		&button_sleep,
 		&button_bias_tee,
 		&image_clock_status,
 		&sd_card_status_view,
@@ -191,6 +191,7 @@ void SystemStatusView::menu_hide() {
 }
 
 void SystemStatusView::menu_show() {
+	//this->set_back_enabled(!this->navigation_view.is_top()); //@todo set the back button as enabled or not
 	button_back.hidden(false);
 	button_speaker.hidden(false);
 	button_stealth.hidden(false);
@@ -230,11 +231,11 @@ void SystemStatusView::refresh() {
 		button_bias_tee.set_foreground(ui::Color::light_grey());
 	}
 	this->menu_hide();
-	set_dirty();
+	//set_clean();
 }
 
 void SystemStatusView::set_back_enabled(bool new_value) {
-	button_back.set_foreground(new_value ? Color::white() : Color::dark_grey());
+	button_back.hidden(new_value ? false : true);
 	button_back.set_focusable(new_value);
 }
 
@@ -335,7 +336,7 @@ View* NavigationView::push_view(std::unique_ptr<View> new_view) {
 	view_stack.emplace_back(std::move(new_view));
 
 	update_view();
-
+	
 	return p;
 }
 
@@ -519,6 +520,7 @@ SystemMenuView::SystemMenuView(NavigationView& nav) {
 	});
 	set_max_rows(2); // allow wider buttons
 	//set_highlighted(1);		// Startup selection
+	set_clean();
 }
 
 /* SystemView ************************************************************/
@@ -537,7 +539,7 @@ SystemView::SystemView(
 {
 	set_style(&style_default);
 
-	constexpr ui::Dim status_view_height = 16;
+	constexpr ui::Dim status_view_height = 32;
 	
 	add_child(&status_view);
 	status_view.set_parent_rect({
@@ -553,10 +555,10 @@ SystemView::SystemView(
 		{ 0, status_view_height },
 		{ parent_rect.width(), static_cast<ui::Dim>(parent_rect.height() - status_view_height) }
 	});
+
 	navigation_view.on_view_changed = [this](const View& new_view) {
 		this->status_view.set_back_enabled(!this->navigation_view.is_top());
 		this->status_view.set_title(new_view.title());
-		
 	};
 
 	// portapack::persistent_memory::set_playdead_sequence(0x8D1);

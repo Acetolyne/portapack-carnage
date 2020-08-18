@@ -120,7 +120,7 @@ private:
 
 	ImageButton button_show {
 		{ 224, 0 * 16, 32, 32 },
-		&bitmap_icon_previous,
+		&bitmap_menu_show,
 		Color::white(),
 		Color::dark_grey()
 	};
@@ -129,7 +129,7 @@ private:
 		{ 4, 0 * 16, 32, 32 },
 		&bitmap_icon_previous,
 		Color::yellow(),
-		Color::dark_grey()
+		Color::black()
 	};
 
 	Text title {
@@ -138,14 +138,14 @@ private:
 	};
 
 	ImageButton button_speaker {
- 		{ 17 * 8, 0, 32, 32 },
+ 		{ 36, 0, 32, 32 },
  		&bitmap_icon_speaker_mute,
  		Color::light_grey(),
  		Color::dark_grey()
  	};
 	
 	ImageButton button_stealth {
-		{ 19 * 8, 0, 32, 32 },
+		{ 68, 0, 32, 32 },
 		&bitmap_icon_stealth,
 		Color::light_grey(),
 		Color::dark_grey()
@@ -159,40 +159,40 @@ private:
 	};*/
 
 	ImageButton button_camera {
-		{ 21 * 8, 0, 32, 32 },
+		{ 100, 0, 32, 32 },
 		&bitmap_icon_camera,
 		Color::white(),
 		Color::dark_grey()
 	};
 
 	ImageButton button_sleep {
-		{ 19 * 8, 0, 32, 32 },
+		{ 132, 0, 32, 32 },
 		&bitmap_icon_sleep,
 		Color::white(),
 		Color::dark_grey()
 	};
 	
 	ImageButton button_bias_tee {
-		{ 21 * 8, 0, 32, 32 },
+		{ 164, 0, 32, 32 },
 		&bitmap_icon_biast_off,
 		Color::light_grey(),
 		Color::dark_grey()
 	};
 	
 	Image image_clock_status {
-		{ 23 * 8, 0 * 16,  32, 32 },
+		{ 196, 0 * 16,  32, 32 },
 		&bitmap_icon_clk_int,
 		Color::light_grey(),
 		Color::dark_grey()
 	};
 	
 	SDCardStatusView sd_card_status_view {
-		{ 25 * 8, 0 * 16,  32, 32 }
+		{ 208, 0 * 16,  32, 32 }
 	};
 
 	ImageButton button_hide {
 		{ 224, 0 * 16, 32, 32 },
-		&bitmap_icon_previous,
+		&bitmap_menu_hide,
 		Color::dark_red(),
 		Color::dark_grey()
 	};
