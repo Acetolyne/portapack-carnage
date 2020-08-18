@@ -193,7 +193,7 @@ private:
 	ImageButton button_hide {
 		{ 224, 0 * 16, 32, 32 },
 		&bitmap_menu_hide,
-		Color::dark_red(),
+		Color::white(),
 		Color::dark_grey()
 	};
 
