@@ -266,10 +266,11 @@ public:
 	);
 
 	Context& context() const override;
+	NavigationView navigation_view { };
 
 private:
 	SystemStatusView status_view { navigation_view };
-	NavigationView navigation_view { };
+	
 	Context& context_;
 };
 

@@ -189,6 +189,7 @@ void SystemStatusView::menu_hide() {
 	button_hide.hidden(true);
 	button_show.hidden(false);
 	this->set_dirty();
+	nav_.set_dirty();
 }
 
 void SystemStatusView::menu_show() {
@@ -554,7 +555,7 @@ SystemView::SystemView(
 
 	add_child(&navigation_view);
 	navigation_view.set_parent_rect({
-		{ 0, status_view_height },
+		{ 0, 0 },
 		{ parent_rect.width() - 32, static_cast<ui::Dim>(parent_rect.height() - status_view_height) }
 	});
 
