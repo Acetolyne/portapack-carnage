@@ -555,7 +555,7 @@ SystemView::SystemView(
 	add_child(&navigation_view);
 	navigation_view.set_parent_rect({
 		{ 0, status_view_height },
-		{ parent_rect.width(), static_cast<ui::Dim>(parent_rect.height() - status_view_height) }
+		{ parent_rect.width() - 32, static_cast<ui::Dim>(parent_rect.height() - status_view_height) }
 	});
 
 	navigation_view.on_view_changed = [this](const View& new_view) {

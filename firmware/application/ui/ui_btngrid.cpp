@@ -79,7 +79,7 @@ void BtnGridView::set_parent_rect(const Rect new_parent_rect) {
 		menu_item_views.clear();
 	}
 
-	button_w = 240 / rows_;
+	button_w = 208 / rows_;
 	for (size_t c = 0; c < displayed_max; c++) {
 		auto item = new NewButton {  };
 		menu_item_views.push_back(item);
