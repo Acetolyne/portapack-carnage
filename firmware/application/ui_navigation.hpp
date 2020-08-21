@@ -119,7 +119,7 @@ private:
 	};
 
 	ImageButton button_show {
-		{ 224, 0 * 16, 32, 32 },
+		{ 208, 0 * 16, 32, 32 },
 		&bitmap_menu_show,
 		Color::white(),
 		Color::dark_grey()
@@ -191,9 +191,30 @@ private:
 	};
 
 	ImageButton button_hide {
-		{ 224, 0 * 16, 32, 32 },
+		{ 208, 0 * 16, 32, 32 },
 		&bitmap_menu_hide,
 		Color::white(),
+		Color::dark_grey()
+	};
+
+	ImageButton button_side_settings {
+		{ 208, 32, 32, 96 },
+		&bitmap_icon_side_button_tmp,
+		Color::dark_green(),
+		Color::dark_grey()
+	};
+
+	ImageButton button_side_analyse {
+		{ 208, 128, 32, 96 },
+		&bitmap_icon_side_button_tmp,
+		Color::dark_magenta(),
+		Color::dark_grey()
+	};
+
+	ImageButton button_side_debug {
+		{208, 224, 32, 96},
+		&bitmap_icon_side_button_tmp,
+		Color::orange(),
 		Color::dark_grey()
 	};
 

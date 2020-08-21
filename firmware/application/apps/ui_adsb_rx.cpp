@@ -276,7 +276,7 @@ ADSBRxView::ADSBRxView(NavigationView& nav) {
 		&recent_entries_view
 	});
 	
-	recent_entries_view.set_parent_rect({ 0, 16, 240, 272 });
+	recent_entries_view.set_parent_rect({ 0, 16, 208, 288 });
 	recent_entries_view.on_select = [this, &nav](const AircraftRecentEntry& entry) {
 		detailed_entry_key = entry.key();
 		details_view = nav.push<ADSBRxDetailsView>(

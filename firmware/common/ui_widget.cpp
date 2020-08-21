@@ -234,8 +234,8 @@ void Widget::dirty_overlapping_children_in_rect(const Rect& child_rect) {
 
 void View::paint(Painter& painter) {
 	painter.fill_rectangle(
-		screen_rect(),
-		style().background
+		{0, 0, 208, 304},
+		Color::blue()
 	);
 }
 

@@ -116,6 +116,9 @@ SystemStatusView::SystemStatusView(
 		&image_clock_status,
 		&sd_card_status_view,
 		&button_hide,
+		&button_side_settings,
+		&button_side_analyse,
+		&button_side_debug,
 	});
 	
 	if (portapack::persistent_memory::config_speaker()) 
@@ -189,10 +192,15 @@ void SystemStatusView::menu_hide() {
 	button_hide.hidden(true);
 	button_show.hidden(false);
 	this->set_dirty();
-	nav_.set_dirty();
+	this->nav_.set_dirty();
 }
 
 void SystemStatusView::menu_show() {
+	// Set all children invisible too.
+			//for(const auto child : parent()->parent()->children()) {
+			//	child->set_clean();
+			//}
+	//this->parent()->parent()->hidden(true);
 	button_back.hidden(button_back.focusable());
 	button_speaker.hidden(false);
 	button_stealth.hidden(false);
@@ -204,6 +212,7 @@ void SystemStatusView::menu_show() {
 	sd_card_status_view.hidden(false);
 	button_show.hidden(true);
 	button_hide.hidden(false);
+	//this->visible(true);
 	this->set_dirty();
 }
 
