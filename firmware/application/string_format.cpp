@@ -20,6 +20,7 @@
  */
 
 #include "string_format.hpp"
+#include <cstring>
 
 static char* to_string_dec_uint_internal(
 	char* p,
@@ -237,4 +238,15 @@ unsigned int hex2int(char *hex) {
         val = (val << 4) | (byte & 0xF);
       }
   return val;
+}
+
+unsigned int oct2dec(int oct) {
+	int decimalNumber = 0, i = 0, rem;
+	while (oct != 0){
+		rem = oct % 10;
+		oct /= 10;
+		decimalNumber += rem * pow(8, i);
+		++i;
+	}
+	return decimalNumber;
 }

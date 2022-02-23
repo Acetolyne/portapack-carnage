@@ -15,6 +15,7 @@ Using the below include will give you additional string operations see string_fo
 #include "string_format.hpp"
 
 hex2int(char *hex)  //Converts a hex string into the int decimal value
+oct2dec(int *oct)  //Converts an octal to a decimal value
 ```
 
 ## A NOTE ABOUT UI FIELDS

@@ -54,6 +54,7 @@ std::string to_string_timestamp(const rtc::RTC& value);
 std::string to_string_FAT_timestamp(const FATTimestamp& timestamp);
 
 unsigned int hex2int(char *hex);
+unsigned int oct2dec(int oct);
 
 std::string unit_auto_scale(double n, const uint32_t base_nano, uint32_t precision);
 
