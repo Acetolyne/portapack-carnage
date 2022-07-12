@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['gpt_2ec_17507',['gpt.c',['../gpt_8c.html',1,'']]],
-  ['gpt_2eh_17508',['gpt.h',['../gpt_8h.html',1,'']]],
-  ['gpt_5flld_2ec_17509',['gpt_lld.c',['../chibios_2os_2hal_2platforms_2AT91SAM7_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC11Uxx_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC11xx_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC122x_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC13xx_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC8xx_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2templates_2gpt__lld_8c.html',1,'(Global Namespace)'],['../chibios-portapack_2os_2hal_2platforms_2LPC43xx_2gpt__lld_8c.html',1,'(Global Namespace)']]],
-  ['gpt_5flld_2eh_17510',['gpt_lld.h',['../chibios_2os_2hal_2platforms_2AT91SAM7_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC11Uxx_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC11xx_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC122x_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC13xx_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2platforms_2LPC8xx_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios_2os_2hal_2templates_2gpt__lld_8h.html',1,'(Global Namespace)'],['../chibios-portapack_2os_2hal_2platforms_2LPC43xx_2gpt__lld_8h.html',1,'(Global Namespace)']]]
-];
