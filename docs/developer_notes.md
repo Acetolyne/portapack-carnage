@@ -1,4 +1,12 @@
-This file to contain notes to aide in development of new modules
+This file to contain notes to aide in development of new modules and notes about the structure of the repository which has an uncommon setup.
+
+# Repo structure
+This repository has a branch called mayhem which should never get custom code pushed to it, instead this branch is a mirror of the master branch of the mayhem repository so that we may import the latest features into our repository with some work to bring it into our new UI. This will eventually be automated so that we do not need to manually add the new features to our custom UI in the carnage firmware.
+
+to update the mayhem branch change to the branch and run ```git pull https://github.com/eried/portapack-mayhem.git master``` This will download the latest changes of the master branch on the mayhem firmware into the branch then we can run ```git push``` to add the changes into our repository.
+
+# Documentation
+API documentation is available at http://www.portapack-carnage.com/ 
 
 ## EXAMPLE CONVERSIONS
 
