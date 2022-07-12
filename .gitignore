@@ -39,7 +39,6 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
 /firmware/baseband/*.bin
@@ -64,8 +63,17 @@ CMakeFiles/
 # Host OS leftovers
 .DS_Store
 /firmware/CMakeCache.txt
+<<<<<<< HEAD
 /sdcard/ADSB/airlines.txt
 
 #Custom ignores
 todo
 
+=======
+
+# Python env
+env/
+
+# Other
+*.bak
+>>>>>>> c389ce7c0e7818f984bb5a5d5b556835c7fe0063
